@@ -17,7 +17,7 @@ var formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
   });
-  
+
 const SMALLPIZZADIAMETER = 13;
 const LARGEPIZZADIAMETER = 17;
 const SMALLPIZZACOST = 16.99;
@@ -68,6 +68,28 @@ console.log (`CardValues = [${cardOne}, ${cardTwo}, ${cardThree}] MAX value = ${
 // 
 // Write code that is able to extract the first name from this string into a variable.
 // Hint: use indexOf, slice, and / or substring
+const user = `John Doe 
+114 Maple Ave
+Chicago, IL 60643`;
+
+let contactInfo = user.split("\n");
+let contactName = contactInfo[0];
+let contactAddress1 = contactInfo[1];
+let contactAddress2 = contactInfo[2];
+
+let name = contactName.split(" ");
+let firstName = name[0];
+let lastName = name[1];
+let cityStateZip = contactAddress2.split(" ");
+let city = cityStateZip[0].replace(',', '');
+let state = cityStateZip[1];
+let zipCode = cityStateZip[2];
+
+console.log("NAME: " + lastName +  "," + firstName);
+console.log("ADDRESS:" + contactAddress1);
+console.log("CITY: " + city);
+console.log("STATE: " + state);
+console.log("ZIP: " + zipCode);
 
 
 /**
@@ -85,4 +107,5 @@ const ENDDATE = new Date(2019, 3, 1);
 function getMidDate(startDate, endDate){
     return new Date((startDate.getTime() + endDate.getTime()) / 2);
 }    
+
 console.log('mid date = ' + getMidDate(new Date("08/14/2020"),  new Date("09/14/2020")));
