@@ -3,21 +3,53 @@
  */
 
 // 1. Pagliacci charges $16.99 for a 13” pizza and $19.99 for a 17” pizza.
-// What is the area for each of these pizzas?
+// What is the area for each of these pizzas? A = πr2
 // (radius would be the listed size - i.e. 13" - divided by 2)
+function calcCircleArea(radius) {
+    return Math.PI * (Math.pow((radius/2), 2));
+}
 
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  
+    // These options are needed to round to whole numbers if that's what you want.
+    minimumFractionDigits: 2, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
+
+const SMALLPIZZADIAMETER = 13;
+const LARGEPIZZADIAMETER = 17;
+const SMALLPIZZACOST = 16.99;
+const LARGEPIZZACOST = 19.99;
+
+smallPizzaArea = calcCircleArea(SMALLPIZZADIAMETER);
+console.log('small pizza area = ' + smallPizzaArea + " square inches");
+largePizzaArea = calcCircleArea(LARGEPIZZADIAMETER);
+console.log('small pizza area = ' + largePizzaArea + " square inches");
 
 // 2. What is the cost per square inch of each pizza?
-
+smallPizzaCostArea = SMALLPIZZACOST/smallPizzaArea;
+console.log('small pizza cost per square inch = ' + formatter.format(smallPizzaCostArea));
+largePizzaCostArea = LARGEPIZZACOST/largePizzaArea;
+console.log('large pizza cost per square inch = ' + formatter.format(largePizzaCostArea));
 
 // 3. Using the Math object, put together a code snippet
 // that allows you to draw a random card with a value
 // between 1 and 13 (assume ace is 1, jack is 11…)
 
+function getRandomCard(){
+    return Math.floor(Math.random() * 14);
+}
+
+console.log ('Random card = ' + getRandomCard());
 
 // 4. Draw 3 cards and use Math to determine the highest
 // card
-
+cardOne = getRandomCard();
+cardTwo = getRandomCard();
+cardThree = getRandomCard();
+console.log (`CardValues = [${cardOne}, ${cardTwo}, ${cardThree}] MAX value = ${Math.max(cardOne, cardTwo, cardThree)}`);
 
 /**
  * ADDRESS LINE
@@ -36,6 +68,28 @@
 // 
 // Write code that is able to extract the first name from this string into a variable.
 // Hint: use indexOf, slice, and / or substring
+const user = `John Doe 
+114 Maple Ave
+Chicago, IL 60643`;
+
+let contactInfo = user.split("\n");
+let contactName = contactInfo[0];
+let contactAddress1 = contactInfo[1];
+let contactAddress2 = contactInfo[2];
+
+let name = contactName.split(" ");
+let firstName = name[0];
+let lastName = name[1];
+let cityStateZip = contactAddress2.split(" ");
+let city = cityStateZip[0].replace(',', '');
+let state = cityStateZip[1];
+let zipCode = cityStateZip[2];
+
+console.log("NAME: " + lastName +  "," + firstName);
+console.log("ADDRESS:" + contactAddress1);
+console.log("CITY: " + city);
+console.log("STATE: " + state);
+console.log("ZIP: " + zipCode);
 
 
 /**
@@ -47,4 +101,11 @@
 // Look online for documentation on Date objects.
 
 // Starting hint:
-const endDate = new Date(2019, 3, 1);
+const ENDDATE = new Date(2019, 3, 1);
+// I used getTime from here https://www.w3schools.com/jsref/jsref_gettime.asp
+
+function getMidDate(startDate, endDate){
+    return new Date((startDate.getTime() + endDate.getTime()) / 2);
+}    
+
+console.log('mid date = ' + getMidDate(new Date("08/14/2020"),  new Date("09/14/2020")));
